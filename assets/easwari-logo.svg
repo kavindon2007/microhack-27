@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 140" fill="none">
+  <!-- College Shield Crest -->
+  <g transform="translate(15, 10)">
+    <rect x="10" y="10" width="90" height="100" rx="16" fill="#0d2240" stroke="#13ecc8" stroke-width="2.5"/>
+    <!-- SRM gear & torch/book motif -->
+    <circle cx="55" cy="48" r="26" fill="none" stroke="#f59e0b" stroke-width="2" stroke-dasharray="4 2"/>
+    <circle cx="55" cy="48" r="16" fill="#0b162a" stroke="#13ecc8" stroke-width="1.5"/>
+    <!-- Microchip/EE motif -->
+    <path d="M48 48 L62 48 M55 41 L55 55" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+    <path d="M45 76 Q55 70 65 76 L65 84 Q55 78 45 84 Z" fill="#f59e0b"/>
+    <text x="55" y="102" font-family="sans-serif" font-size="9" font-weight="bold" fill="#13ecc8" text-anchor="middle" letter-spacing="1">AUTONOMOUS</text>
+  </g>
+  <!-- College Name -->
+  <text x="135" y="46" font-family="'Space Grotesk', sans-serif" font-weight="900" font-size="32" fill="#FFFFFF" letter-spacing="1">EASWARI</text>
+  <text x="295" y="46" font-family="'Space Grotesk', sans-serif" font-weight="700" font-size="24" fill="#94a3b8" letter-spacing="1">ENGINEERING COLLEGE</text>
+  <text x="135" y="72" font-family="'Space Grotesk', sans-serif" font-weight="500" font-size="13" fill="#38bdf8" letter-spacing="0.5">An AUTONOMOUS Institution · Affiliated to ANNA UNIVERSITY</text>
+  <text x="135" y="94" font-family="'Space Grotesk', sans-serif" font-weight="600" font-size="12" fill="#64748b" letter-spacing="1.5">RAMAPURAM, CHENNAI · SRM GROUP</text>
+</svg>
