@@ -1434,7 +1434,12 @@
   };
 
   // --- Form & Action Handlers ---
-  window.MicroHack = {
+  window.MicroHack = Object.assign(window.MicroHack || {}, {
+    navigate: (route) => {
+      const clean = route.startsWith("/") ? route : "/" + route;
+      window.location.hash = "#" + clean;
+      renderApp();
+    },
     openQRModal: () => {
       const modal = document.getElementById("qr-modal");
       if (modal) {
@@ -1479,7 +1484,7 @@
       saveTeam(teamData);
       showToast("Registration Confirmed! 🎉", `Team "${teamName}" registered for MICROHACK'27. Proceeding to proposal dashboard.`, "success");
       setTimeout(() => {
-        navigateTo("/my-submissions");
+        window.MicroHack.navigate("/my-submissions");
       }, 700);
     },
     handleSubmit: (e) => {
@@ -1500,27 +1505,45 @@
       saveSubmission(subData);
       showToast("Proposal Submitted! ⚡", "Round 1 PPT link recorded successfully. Your team profile is now updated.", "success");
       setTimeout(() => {
-        navigateTo("/my-submissions");
+        window.MicroHack.navigate("/my-submissions");
       }, 700);
     }
-  };
+  });
 
-  // --- Global Event Listeners & Hardware Smoothness ---
+  // --- Global Event Delegation & Instant Click Router ---
+  window._renderApp = renderApp;
   window.addEventListener("hashchange", renderApp);
-  window.addEventListener("DOMContentLoaded", () => {
+
+  // Catch all clicks on hash links across the entire document
+  document.addEventListener("click", (e) => {
+    const link = e.target.closest("a");
+    if (!link) return;
+    const href = link.getAttribute("href");
+    if (href && href.startsWith("#/")) {
+      e.preventDefault();
+      window.MicroHack.navigate(href.slice(1));
+    }
+  });
+
+  const initApp = () => {
     renderApp();
 
     // Mobile Hamburger
     const menuBtn = document.getElementById("mobile-menu-btn");
     const mobileMenu = document.getElementById("mobile-menu");
     if (menuBtn && mobileMenu) {
-      menuBtn.addEventListener("click", () => {
-        mobileMenu.classList.toggle("hidden");
+      menuBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        if (mobileMenu.style.display === "block") {
+          mobileMenu.style.display = "none";
+        } else {
+          mobileMenu.style.display = "block";
+        }
       });
       // Auto close mobile menu when link is clicked
       mobileMenu.querySelectorAll("a").forEach(link => {
         link.addEventListener("click", () => {
-          mobileMenu.classList.add("hidden");
+          mobileMenu.style.display = "none";
         });
       });
     }
@@ -1552,6 +1575,13 @@
       if (m) m.textContent = cd.minutes;
       if (s) s.textContent = cd.seconds;
     }, 1000);
-  });
+  };
+
+  // Immediate Execution Guard (works whether DOM is loading, interactive, or complete)
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initApp);
+  } else {
+    initApp();
+  }
 })();
 
