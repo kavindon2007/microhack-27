@@ -22,33 +22,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
 
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        "primary": "#0d59f2",
-                        "primary-hover": "#0b4bc9",
-                        "microchip-red": "#e31837",
-                        "accent-cyan": "#0db9f2",
-                        "accent-emerald": "#13ecc8",
-                        "accent-pink": "#f20da6",
-                        "background-dark": "#101622",
-                        "surface-dark": "#161e2e",
-                        "border-dark": "#2d3748",
-                    },
-                    fontFamily: {
-                        "sans": ["Space Grotesk", "sans-serif"],
-                        "display": ["Space Grotesk", "sans-serif"]
-                    }
-                }
-            }
-        }
-    </script>
-    <link rel="stylesheet" href="./style.css?v=20261104_05">
+    <!-- Pre-compiled Ultra-Fast Production Stylesheet (Zero Runtime CDN Overhead) -->
+    <link rel="stylesheet" href="./style.css?v=20261104_06">
     <script>
         window.MicroHack = {
             navigate: function(route) {
@@ -166,7 +141,8 @@
     <!-- Main Dynamic Application Container -->
     <main id="app" class="flex-grow z-10 pt-28">
         
-      <div class="flex flex-col items-center overflow-x-hidden min-h-screen relative text-white">
+      <div id="view-home" class="page-view">
+        <div class="flex flex-col items-center overflow-x-hidden min-h-screen relative text-white">
         <!-- Hero Section -->
         <section class="relative w-full min-h-[85vh] flex flex-col justify-center pt-20 pb-16 overflow-hidden">
           <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[450px] bg-gradient-to-r from-primary/20 via-accent-cyan/15 to-primary/20 blur-[130px] rounded-full opacity-60 pointer-events-none"></div>
@@ -621,8 +597,18 @@
             </div>
           </div>
         </section>
+        </div>
       </div>
-    
+
+      <!-- Pre-created Ultra-Fast Zero-Delay View Containers -->
+      <div id="view-guidelines" class="page-view" style="display: none;"></div>
+      <div id="view-challenges" class="page-view" style="display: none;"></div>
+      <div id="view-schedule" class="page-view" style="display: none;"></div>
+      <div id="view-register" class="page-view" style="display: none;"></div>
+      <div id="view-submit" class="page-view" style="display: none;"></div>
+      <div id="view-my-submissions" class="page-view" style="display: none;"></div>
+      <div id="view-challenge-detail" class="page-view" style="display: none;"></div>
+      <div id="view-other" class="page-view" style="display: none;"></div>
     </main>
 
     <!-- Global Footer -->
@@ -747,7 +733,7 @@
     <div id="toast-container"></div>
 
     <!-- Scripts -->
-    <script src="./app.js?v=20261104_05" defer></script>
+    <script src="./app.js?v=20261104_06" defer></script>
 </body>
 
 </html>

@@ -1,0 +1,14 @@
+{
+  "name": "microhack-27",
+  "version": "1.0.0",
+  "description": "MICROHACK'27 — 36 Hours National Level Hackathon",
+  "scripts": {
+    "build:css": "tailwindcss -i ./input.css -o ./style.css --minify",
+    "build": "tailwindcss -i ./input.css -o ./style.css --minify"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.17"
+  }
+}

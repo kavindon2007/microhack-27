@@ -1331,14 +1331,14 @@
     `;
   };
 
-  // --- Main View Router ---
-  const renderApp = () => {
-    const appEl = document.getElementById("app");
-    if (!appEl) return;
+  // --- High-Performance Multi-Container Router (0ms Zero Delay Switching) ---
+  let currentRoute = null;
+  let isNavigating = false;
+  const viewCache = {
+    "/": true // Home view is pre-rendered in static HTML (#view-home)
+  };
 
-    const route = getRoute();
-
-    // Update active nav links
+  const updateNavLinks = (route) => {
     document.querySelectorAll(".nav-link").forEach(link => {
       const target = link.getAttribute("data-route");
       if (target === route || (target !== "/" && route.startsWith(target))) {
@@ -1350,45 +1350,112 @@
       }
     });
 
-    // Mobile menu hide
     const mobileMenu = document.getElementById("mobile-menu");
     if (mobileMenu && !mobileMenu.classList.contains("hidden")) {
       mobileMenu.classList.add("hidden");
     }
+  };
 
-    // Universal cross-browser scroll to top (never throws TypeError)
-    window.scrollTo(0, 0);
-
-    let htmlContent = "";
-    if (route === "/" || route === "") {
-      htmlContent = renderHome();
-    } else if (route === "/guidelines") {
-      htmlContent = renderGuidelines();
-    } else if (route === "/challenges") {
-      htmlContent = renderChallenges();
-    } else if (route.startsWith("/challenges/")) {
-      const trackId = route.replace("/challenges/", "");
-      htmlContent = renderChallengeDetail(trackId);
-    } else if (route === "/schedule") {
-      htmlContent = renderSchedule();
-    } else if (route === "/register") {
-      htmlContent = renderRegister();
-    } else if (route === "/submit") {
-      htmlContent = renderSubmit();
-    } else if (route === "/my-submissions") {
-      htmlContent = renderMySubmissions();
-    } else if (route === "/health") {
-      htmlContent = renderHealth();
-    } else if (route === "/privacy") {
-      htmlContent = renderPrivacy();
-    } else if (route === "/terms") {
-      htmlContent = renderTerms();
-    } else {
-      htmlContent = renderNotFound();
+  const renderApp = (force = false) => {
+    const route = getRoute();
+    if (!force && route === currentRoute) {
+      window.scrollTo(0, 0);
+      return;
     }
 
-    appEl.innerHTML = `<div class="page-enter">${htmlContent}</div>`;
-    initScrollReveal();
+    updateNavLinks(route);
+    window.scrollTo(0, 0);
+
+    const appEl = document.getElementById("app");
+    if (!appEl) return;
+
+    // Determine target container and rendering function
+    let targetId = "view-home";
+    let renderFn = null;
+    let cacheKey = route;
+
+    if (route === "/" || route === "") {
+      targetId = "view-home";
+      renderFn = null; // already in static HTML
+    } else if (route === "/guidelines") {
+      targetId = "view-guidelines";
+      renderFn = renderGuidelines;
+    } else if (route === "/challenges") {
+      targetId = "view-challenges";
+      renderFn = renderChallenges;
+    } else if (route.startsWith("/challenges/")) {
+      const trackId = route.replace("/challenges/", "");
+      targetId = "view-challenge-detail";
+      renderFn = () => renderChallengeDetail(trackId);
+      cacheKey = route;
+    } else if (route === "/schedule") {
+      targetId = "view-schedule";
+      renderFn = renderSchedule;
+    } else if (route === "/register") {
+      targetId = "view-register";
+      renderFn = renderRegister;
+    } else if (route === "/submit") {
+      targetId = "view-submit";
+      renderFn = renderSubmit;
+    } else if (route === "/my-submissions") {
+      targetId = "view-my-submissions";
+      renderFn = renderMySubmissions;
+      cacheKey = null; // Always refresh with latest submissions
+    } else if (route === "/health") {
+      targetId = "view-other";
+      renderFn = renderHealth;
+    } else if (route === "/privacy") {
+      targetId = "view-other";
+      renderFn = renderPrivacy;
+    } else if (route === "/terms") {
+      targetId = "view-other";
+      renderFn = renderTerms;
+    } else {
+      targetId = "view-other";
+      renderFn = renderNotFound;
+    }
+
+    // Hide all view containers inside #app
+    const allViews = appEl.querySelectorAll(".page-view");
+    allViews.forEach(v => {
+      v.style.display = "none";
+    });
+
+    let targetEl = document.getElementById(targetId);
+    if (!targetEl) {
+      targetEl = document.createElement("div");
+      targetEl.id = targetId;
+      targetEl.className = "page-view";
+      appEl.appendChild(targetEl);
+    }
+
+    // Populate view if not yet cached or if dynamic
+    if (renderFn && (!cacheKey || !viewCache[cacheKey])) {
+      targetEl.innerHTML = `<div class="page-enter">${renderFn()}</div>`;
+      if (cacheKey) viewCache[cacheKey] = true;
+    }
+
+    // Instantly display target view (0ms switch)
+    targetEl.style.display = "block";
+    currentRoute = route;
+  };
+
+  // Pre-warm static views in idle time so initial clicks are also 0ms instant
+  const warmUpViews = () => {
+    const list = [
+      { id: "view-guidelines", fn: renderGuidelines, key: "/guidelines" },
+      { id: "view-challenges", fn: renderChallenges, key: "/challenges" },
+      { id: "view-schedule", fn: renderSchedule, key: "/schedule" },
+      { id: "view-register", fn: renderRegister, key: "/register" },
+      { id: "view-submit", fn: renderSubmit, key: "/submit" }
+    ];
+    list.forEach(item => {
+      const el = document.getElementById(item.id);
+      if (el && !viewCache[item.key]) {
+        el.innerHTML = `<div class="page-enter">${item.fn()}</div>`;
+        viewCache[item.key] = true;
+      }
+    });
   };
 
   // --- Smooth Toast Notification System ---
@@ -1437,8 +1504,15 @@
   window.MicroHack = Object.assign(window.MicroHack || {}, {
     navigate: (route) => {
       const clean = route.startsWith("/") ? route : "/" + route;
-      window.location.hash = "#" + clean;
+      const targetHash = "#" + clean;
+      if (window.location.hash === targetHash) {
+        renderApp();
+        return;
+      }
+      isNavigating = true;
+      window.location.hash = targetHash;
       renderApp();
+      setTimeout(() => { isNavigating = false; }, 60);
     },
     openQRModal: () => {
       const modal = document.getElementById("qr-modal");
@@ -1482,6 +1556,7 @@
       };
 
       saveTeam(teamData);
+      delete viewCache["/my-submissions"];
       showToast("Registration Confirmed! 🎉", `Team "${teamName}" registered for MICROHACK'27. Proceeding to proposal dashboard.`, "success");
       setTimeout(() => {
         window.MicroHack.navigate("/my-submissions");
@@ -1503,6 +1578,7 @@
       };
 
       saveSubmission(subData);
+      delete viewCache["/my-submissions"];
       showToast("Proposal Submitted! ⚡", "Round 1 PPT link recorded successfully. Your team profile is now updated.", "success");
       setTimeout(() => {
         window.MicroHack.navigate("/my-submissions");
@@ -1512,7 +1588,11 @@
 
   // --- Global Event Delegation & Instant Click Router ---
   window._renderApp = renderApp;
-  window.addEventListener("hashchange", renderApp);
+  window.addEventListener("hashchange", () => {
+    if (!isNavigating) {
+      renderApp();
+    }
+  });
 
   // Catch all clicks on hash links across the entire document
   document.addEventListener("click", (e) => {
@@ -1527,6 +1607,8 @@
 
   const initApp = () => {
     renderApp();
+    // Warm up static views so every click is 0ms instant
+    setTimeout(warmUpViews, 10);
 
     // Mobile Hamburger
     const menuBtn = document.getElementById("mobile-menu-btn");
