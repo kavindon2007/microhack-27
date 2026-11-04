@@ -1356,8 +1356,8 @@
       mobileMenu.classList.add("hidden");
     }
 
-    // Scroll to top
-    window.scrollTo({ top: 0, behavior: "instant" });
+    // Universal cross-browser scroll to top (never throws TypeError)
+    window.scrollTo(0, 0);
 
     let htmlContent = "";
     if (route === "/" || route === "") {
@@ -1437,11 +1437,15 @@
   window.MicroHack = {
     openQRModal: () => {
       const modal = document.getElementById("qr-modal");
-      if (modal) modal.classList.remove("hidden");
+      if (modal) {
+        modal.style.display = "flex";
+      }
     },
     closeQRModal: () => {
       const modal = document.getElementById("qr-modal");
-      if (modal) modal.classList.add("hidden");
+      if (modal) {
+        modal.style.display = "none";
+      }
     },
     handleRegister: (e) => {
       e.preventDefault();
@@ -1535,17 +1539,6 @@
         window.MicroHack.closeQRModal();
       }
     });
-
-    // Throttled 60/120fps Cursor Sheen
-    let rafId = null;
-    window.addEventListener("pointermove", (e) => {
-      if (rafId) return;
-      rafId = requestAnimationFrame(() => {
-        document.documentElement.style.setProperty("--mx", `${e.clientX}px`);
-        document.documentElement.style.setProperty("--my", `${e.clientY}px`);
-        rafId = null;
-      });
-    }, { passive: true });
 
     // Live Countdown Interval
     setInterval(() => {

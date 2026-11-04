@@ -48,56 +48,38 @@ html {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
 }
 
-/* Glassmorphism & Cyber Sheen */
+/* Glassmorphism & Fast GPU Hover Glows */
 .glass {
-  background: rgba(22, 30, 46, 0.75);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  background: rgba(22, 30, 46, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.08);
   position: relative;
   overflow: hidden;
-  transition: transform var(--dur-med) var(--ease-out), border-color var(--dur-med) var(--ease-soft), box-shadow var(--dur-med) var(--ease-soft);
+  transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.glass::before {
-  content: "";
-  position: absolute;
-  inset: -1px;
-  background:
-    radial-gradient(450px circle at var(--mx) var(--my), rgba(13, 89, 242, 0.22), transparent 55%),
-    radial-gradient(350px circle at calc(var(--mx) + 120px) calc(var(--my) + 120px), rgba(19, 236, 200, 0.12), transparent 60%);
-  opacity: 0;
-  transition: opacity var(--dur-med) var(--ease-soft);
-  pointer-events: none;
-}
-
-.glass:hover::before {
-  opacity: 1;
+.glass:hover {
+  border-color: rgba(13, 185, 242, 0.35);
+  box-shadow: 0 12px 35px -10px rgba(13, 89, 242, 0.25);
+  transform: translateY(-2px);
 }
 
 .glass-premium {
-  background: rgba(16, 22, 34, 0.65);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.25);
+  background: rgba(16, 22, 34, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
   position: relative;
   overflow: hidden;
-  transition: transform var(--dur-med) var(--ease-out), border-color var(--dur-med) var(--ease-soft), box-shadow var(--dur-med) var(--ease-soft);
+  transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.glass-premium::before {
-  content: "";
-  position: absolute;
-  inset: -1px;
-  background: radial-gradient(420px circle at var(--mx) var(--my), rgba(13, 185, 242, 0.18), transparent 60%);
-  opacity: 0;
-  transition: opacity var(--dur-med) var(--ease-soft);
-  pointer-events: none;
-}
-
-.glass-premium:hover::before {
-  opacity: 1;
+.glass-premium:hover {
+  border-color: rgba(19, 236, 200, 0.35);
+  box-shadow: 0 15px 45px -10px rgba(13, 185, 242, 0.2);
+  transform: translateY(-2px);
 }
 
 /* Keyframe Animations (GPU accelerated) */
