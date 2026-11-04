@@ -549,210 +549,305 @@
     `;
   };
 
-  // 2. GUIDELINES VIEW
+  // 2. GUIDELINES VIEW (Matching impact-nexus-26 typography & fluidity)
   const renderGuidelines = () => {
     return `
-      <div class="relative min-h-screen overflow-hidden px-6 py-12 max-w-6xl mx-auto">
-        <!-- Header -->
-        <div class="text-center mb-16">
-          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-accent-cyan text-xs font-bold uppercase tracking-widest mb-4">
-            <span class="material-symbols-outlined text-sm">gavel</span>
-            <span>Official Rulebook</span>
-          </div>
-          <h1 class="text-4xl sm:text-6xl font-black text-white uppercase italic tracking-tight mb-4">
-            Hackathon Guidelines
-          </h1>
-          <p class="text-slate-400 max-w-2xl mx-auto text-sm sm:text-base leading-relaxed">
-            Everything you need to know about team eligibility, evaluation rubrics, hardware guidelines, and participation rules for MICROHACK'27.
-          </p>
-        </div>
+      <div class="relative min-h-screen overflow-hidden">
+        <!-- Atmospheric Glowing Orbs -->
+        <div class="absolute top-0 left-1/4 w-[800px] h-[800px] bg-primary/10 rounded-full blur-[120px] animate-pulse-slow pointer-events-none"></div>
+        <div class="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-accent-cyan/10 rounded-full blur-[100px] animate-pulse-slow pointer-events-none" style="animation-delay: 2s;"></div>
 
-        <!-- 4 Core Pillars -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-          <div class="glass rounded-2xl p-6 border border-white/10">
-            <div class="size-12 rounded-xl bg-primary/10 border border-primary/20 text-accent-cyan flex items-center justify-center mb-4">
-              <span class="material-symbols-outlined text-2xl">group</span>
+        <div class="relative z-10 max-w-7xl mx-auto px-6 py-20 lg:py-32">
+          <!-- Header -->
+          <div class="flex flex-col items-center text-center mb-24">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold uppercase tracking-widest mb-8 backdrop-blur-md">
+              <span class="relative flex h-2 w-2">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+              </span>
+              Official Rulebook
             </div>
-            <h3 class="text-base font-bold text-white mb-2">Team Size: 2 - 4</h3>
-            <p class="text-xs text-slate-400 leading-relaxed">
-              Teams must consist of 2 to 4 students currently enrolled in recognized colleges or universities. Inter-departmental teams are encouraged.
+            <h1 class="text-6xl md:text-8xl font-black leading-none tracking-tighter mb-8 text-transparent bg-clip-text bg-gradient-to-b from-white to-slate-500 uppercase italic drop-shadow-2xl py-2">
+              Hackathon <br>Guidelines &amp; Rules
+            </h1>
+            <p class="text-slate-400 text-xl lg:text-2xl max-w-3xl font-light leading-relaxed">
+              Follow these principles to build a winning project at MICROHACK'27. We value hardware innovation, embedded intelligence, and real-world impact.
             </p>
           </div>
 
-          <div class="glass rounded-2xl p-6 border border-white/10">
-            <div class="size-12 rounded-xl bg-accent-emerald/10 border border-accent-emerald/20 text-accent-emerald flex items-center justify-center mb-4">
-              <span class="material-symbols-outlined text-2xl">memory</span>
-            </div>
-            <h3 class="text-base font-bold text-white mb-2">Embedded &amp; Edge Focus</h3>
-            <p class="text-xs text-slate-400 leading-relaxed">
-              Solutions should prioritize on-device inference, microcontroller integration (Microchip SAM, PIC, dsPIC), or edge sensors rather than generic web portals.
-            </p>
-          </div>
-
-          <div class="glass rounded-2xl p-6 border border-white/10">
-            <div class="size-12 rounded-xl bg-accent-cyan/10 border border-accent-cyan/20 text-accent-cyan flex items-center justify-center mb-4">
-              <span class="material-symbols-outlined text-2xl">co_present</span>
-            </div>
-            <h3 class="text-base font-bold text-white mb-2">Live Demo Matters</h3>
-            <p class="text-xs text-slate-400 leading-relaxed">
-              Final evaluation includes live hardware demonstrations and sensor proof-of-concept before the panel of Microchip technical architects.
-            </p>
-          </div>
-
-          <div class="glass rounded-2xl p-6 border border-white/10">
-            <div class="size-12 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-400 flex items-center justify-center mb-4">
-              <span class="material-symbols-outlined text-2xl">verified_user</span>
-            </div>
-            <h3 class="text-base font-bold text-white mb-2">100% Free Entry</h3>
-            <p class="text-xs text-slate-400 leading-relaxed">
-              Zero registration or hidden participation fees. Complete free access to hardware labs, high-speed WiFi, food, and mentoring at Geetham Auditorium.
-            </p>
-          </div>
-        </div>
-
-        <!-- Evaluation Rubric Breakdown -->
-        <div class="glass-premium rounded-3xl p-8 sm:p-12 border border-white/10 mb-16">
-          <div class="mb-8">
-            <span class="text-xs font-bold text-accent-cyan uppercase tracking-widest block mb-1">Judging Criteria</span>
-            <h2 class="text-2xl sm:text-3xl font-black text-white uppercase italic">Evaluation Rubric (100 Points)</h2>
-          </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div class="p-6 rounded-2xl bg-white/5 border border-white/5 flex gap-4">
-              <span class="text-3xl font-black text-accent-cyan font-mono">30%</span>
-              <div>
-                <h4 class="text-base font-bold text-white mb-1">Problem Fit &amp; Innovation</h4>
-                <p class="text-xs text-slate-400 leading-relaxed">
-                  Originality of the approach, depth of understanding of the chosen domain (Industry 5.0, Automotive, or Medical Imaging), and uniqueness of the edge solution.
+          <!-- 4 Core Pillars Grid -->
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Card 1 -->
+            <div class="group h-full relative p-8 glass-premium rounded-3xl hover:-translate-y-2 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10 border border-white/5 hover:border-primary/30">
+              <div class="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl pointer-events-none"></div>
+              <div class="relative z-10 flex flex-col h-full">
+                <div class="mb-6 w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/20 to-primary/5 border border-primary/20 flex items-center justify-center text-primary group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-primary/10">
+                  <span class="material-symbols-outlined text-3xl">track_changes</span>
+                </div>
+                <h2 class="text-2xl font-black leading-tight tracking-tight text-white mb-4 whitespace-pre-line group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-accent-cyan transition-all duration-300">
+                  Focus on the
+                  Core Solution
+                </h2>
+                <p class="text-slate-400 text-sm leading-relaxed group-hover:text-slate-300 transition-colors duration-300">
+                  Don't boil the ocean. Nail the primary embedded problem first and ensure the sensor-to-actuation journey is deterministic and reliable.
                 </p>
               </div>
             </div>
 
-            <div class="p-6 rounded-2xl bg-white/5 border border-white/5 flex gap-4">
-              <span class="text-3xl font-black text-primary font-mono">25%</span>
-              <div>
-                <h4 class="text-base font-bold text-white mb-1">Technical Edge Execution</h4>
-                <p class="text-xs text-slate-400 leading-relaxed">
-                  Quality of embedded code, integration with microcontroller hardware (Microchip PIC/SAM/dsPIC/FPGA), sensor interfacing, and TinyML model efficiency.
+            <!-- Card 2 -->
+            <div class="group h-full relative p-8 glass-premium rounded-3xl hover:-translate-y-2 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10 border border-white/5 hover:border-primary/30">
+              <div class="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl pointer-events-none"></div>
+              <div class="relative z-10 flex flex-col h-full">
+                <div class="mb-6 w-16 h-16 rounded-2xl bg-gradient-to-br from-accent-cyan/20 to-accent-cyan/5 border border-accent-cyan/20 flex items-center justify-center text-accent-cyan group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-accent-cyan/10">
+                  <span class="material-symbols-outlined text-3xl">account_tree</span>
+                </div>
+                <h2 class="text-2xl font-black leading-tight tracking-tight text-white mb-4 whitespace-pre-line group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-accent-cyan transition-all duration-300">
+                  You Decide
+                  the Hardware
+                </h2>
+                <p class="text-slate-400 text-sm leading-relaxed group-hover:text-slate-300 transition-colors duration-300">
+                  Microchip dsPIC, SAM, PIC32, FPGAs, FreeRTOS, TinyML—it's your call. Use the embedded stack that maximizes your edge performance.
                 </p>
               </div>
             </div>
 
-            <div class="p-6 rounded-2xl bg-white/5 border border-white/5 flex gap-4">
-              <span class="text-3xl font-black text-accent-emerald font-mono">25%</span>
-              <div>
-                <h4 class="text-base font-bold text-white mb-1">Feasibility &amp; Real-World Readiness</h4>
-                <p class="text-xs text-slate-400 leading-relaxed">
-                  Power consumption awareness, deterministic latency, adherence to safety standards (ISO 26262 / Medical / Industrial), and cost scalability.
+            <!-- Card 3 -->
+            <div class="group h-full relative p-8 glass-premium rounded-3xl hover:-translate-y-2 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10 border border-white/5 hover:border-primary/30">
+              <div class="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl pointer-events-none"></div>
+              <div class="relative z-10 flex flex-col h-full">
+                <div class="mb-6 w-16 h-16 rounded-2xl bg-gradient-to-br from-accent-emerald/20 to-accent-emerald/5 border border-accent-emerald/20 flex items-center justify-center text-accent-emerald group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-accent-emerald/10">
+                  <span class="material-symbols-outlined text-3xl">volunteer_activism</span>
+                </div>
+                <h2 class="text-2xl font-black leading-tight tracking-tight text-white mb-4 whitespace-pre-line group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-accent-emerald transition-all duration-300">
+                  Think About
+                  Real-World Fit
+                </h2>
+                <p class="text-slate-400 text-sm leading-relaxed group-hover:text-slate-300 transition-colors duration-300">
+                  Design for industrial durability, battery life, and safety. Industrial reliability isn't an afterthought; it's a critical requirement.
                 </p>
               </div>
             </div>
 
-            <div class="p-6 rounded-2xl bg-white/5 border border-white/5 flex gap-4">
-              <span class="text-3xl font-black text-purple-400 font-mono">20%</span>
-              <div>
-                <h4 class="text-base font-bold text-white mb-1">Live Hardware Demo &amp; Pitch</h4>
-                <p class="text-xs text-slate-400 leading-relaxed">
-                  Quality of the live circuit demonstration, clarity of presentation, defense during technical Q&amp;A, and team cohesion.
+            <!-- Card 4 -->
+            <div class="group h-full relative p-8 glass-premium rounded-3xl hover:-translate-y-2 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10 border border-white/5 hover:border-primary/30">
+              <div class="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl pointer-events-none"></div>
+              <div class="relative z-10 flex flex-col h-full">
+                <div class="mb-6 w-16 h-16 rounded-2xl bg-gradient-to-br from-microchip-red/20 to-microchip-red/5 border border-microchip-red/20 flex items-center justify-center text-red-400 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-microchip-red/10">
+                  <span class="material-symbols-outlined text-3xl">co_present</span>
+                </div>
+                <h2 class="text-2xl font-black leading-tight tracking-tight text-white mb-4 whitespace-pre-line group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-red-400 transition-all duration-300">
+                  Live Demo
+                  Matters
+                </h2>
+                <p class="text-slate-400 text-sm leading-relaxed group-hover:text-slate-300 transition-colors duration-300">
+                  Polish your pitch and test your circuits. Show live oscilloscope traces and hardware proof before Microchip technical architects.
                 </p>
               </div>
             </div>
           </div>
-        </div>
 
-        <!-- FAQs Section -->
-        <div class="space-y-4 max-w-4xl mx-auto">
-          <h2 class="text-2xl font-black text-white uppercase italic mb-6 text-center">Frequently Asked Questions</h2>
+          <!-- Evaluation Rubric Breakdown (ImpactNexus Glass Style) -->
+          <div class="mt-28 glass-premium rounded-3xl p-8 md:p-14 border border-white/10 relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary to-transparent opacity-50"></div>
+            <div class="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent pointer-events-none"></div>
+            <div class="relative z-10">
+              <div class="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-4">
+                <div>
+                  <span class="text-xs font-bold text-accent-cyan uppercase tracking-widest block mb-2 font-mono">Official Rubric</span>
+                  <h2 class="text-3xl sm:text-5xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white to-slate-400 uppercase italic">
+                    Judging Criteria (100 Pts)
+                  </h2>
+                </div>
+                <span class="px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-bold text-slate-300 self-start md:self-auto backdrop-blur-md">
+                  Microchip &amp; CEEI Panel
+                </span>
+              </div>
 
-          <div class="glass rounded-xl p-5 border border-white/10">
-            <h4 class="text-sm font-bold text-white mb-1">Who is eligible to participate?</h4>
-            <p class="text-xs text-slate-400 leading-relaxed">
-              Undergraduate, postgraduate, and diploma engineering students across India are eligible. Team size must be strictly 2 to 4 members.
-            </p>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="p-6 rounded-2xl bg-white/[0.03] border border-white/5 hover:border-accent-cyan/30 transition-all duration-300 flex gap-5">
+                  <span class="text-4xl font-black text-accent-cyan font-mono tracking-tight shrink-0">30%</span>
+                  <div>
+                    <h4 class="text-lg font-black text-white mb-1.5 tracking-tight">Problem Fit &amp; Edge Innovation</h4>
+                    <p class="text-xs text-slate-400 leading-relaxed font-light">
+                      Originality of the concept, depth of domain understanding in Industry 5.0, Automotive, or Medical Imaging, and on-device compute value.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="p-6 rounded-2xl bg-white/[0.03] border border-white/5 hover:border-primary/30 transition-all duration-300 flex gap-5">
+                  <span class="text-4xl font-black text-primary font-mono tracking-tight shrink-0">25%</span>
+                  <div>
+                    <h4 class="text-lg font-black text-white mb-1.5 tracking-tight">Technical Hardware Execution</h4>
+                    <p class="text-xs text-slate-400 leading-relaxed font-light">
+                      Embedded firmware quality, Microchip microcontroller/DSC interfacing, sensor bus communication (CAN/SPI/I2C), and TinyML optimization.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="p-6 rounded-2xl bg-white/[0.03] border border-white/5 hover:border-accent-emerald/30 transition-all duration-300 flex gap-5">
+                  <span class="text-4xl font-black text-accent-emerald font-mono tracking-tight shrink-0">25%</span>
+                  <div>
+                    <h4 class="text-lg font-black text-white mb-1.5 tracking-tight">Feasibility &amp; Industrial Safety</h4>
+                    <p class="text-xs text-slate-400 leading-relaxed font-light">
+                      Power efficiency, real-time deterministic latency, fail-safe watchdog mechanisms, and alignment with industry standards (e.g. ISO 26262).
+                    </p>
+                  </div>
+                </div>
+
+                <div class="p-6 rounded-2xl bg-white/[0.03] border border-white/5 hover:border-purple-400/30 transition-all duration-300 flex gap-5">
+                  <span class="text-4xl font-black text-purple-400 font-mono tracking-tight shrink-0">20%</span>
+                  <div>
+                    <h4 class="text-lg font-black text-white mb-1.5 tracking-tight">Live Hardware Demonstration</h4>
+                    <p class="text-xs text-slate-400 leading-relaxed font-light">
+                      Clarity of the live bench demonstration, signal stability, live sensor responsiveness, and confidence during technical defense with jury.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
-          <div class="glass rounded-xl p-5 border border-white/10">
-            <h4 class="text-sm font-bold text-white mb-1">Can we bring our own hardware and dev boards?</h4>
-            <p class="text-xs text-slate-400 leading-relaxed">
-              Yes! Teams are permitted and encouraged to bring their preferred microcontrollers, development boards (Microchip, Arduino, ESP32, STM32, Raspberry Pi, etc.), sensors, actuators, and laptops. Standard lab equipment and select Microchip boards will also be available on-site.
-            </p>
+          <!-- FAQs Section -->
+          <div class="mt-28 max-w-4xl mx-auto space-y-4">
+            <div class="text-center mb-12">
+              <span class="text-xs font-bold text-accent-cyan uppercase tracking-widest block mb-2 font-mono">Clarifications</span>
+              <h2 class="text-3xl sm:text-4xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white to-slate-400 uppercase italic">
+                Frequently Asked Questions
+              </h2>
+            </div>
+
+            <div class="glass-premium rounded-2xl p-6 border border-white/10 hover:border-white/20 transition-all">
+              <h4 class="text-base font-bold text-white mb-2">Who is eligible to participate?</h4>
+              <p class="text-sm text-slate-400 leading-relaxed font-light">
+                Undergraduate, postgraduate, and diploma engineering students across India are eligible. Teams must consist strictly of 2 to 4 members.
+              </p>
+            </div>
+
+            <div class="glass-premium rounded-2xl p-6 border border-white/10 hover:border-white/20 transition-all">
+              <h4 class="text-base font-bold text-white mb-2">Can we bring our own hardware and dev boards?</h4>
+              <p class="text-sm text-slate-400 leading-relaxed font-light">
+                Yes! Teams are permitted and encouraged to bring their preferred microcontrollers, development boards (Microchip, Arduino, ESP32, STM32, Raspberry Pi, etc.), sensors, actuators, and laptops. Standard lab equipment and select Microchip boards will also be available on-site.
+              </p>
+            </div>
+
+            <div class="glass-premium rounded-2xl p-6 border border-white/10 hover:border-white/20 transition-all">
+              <h4 class="text-base font-bold text-white mb-2">Is accommodation provided for outstation teams?</h4>
+              <p class="text-sm text-slate-400 leading-relaxed font-light">
+                Yes, hostel accommodation and food during the 36-hour hackathon (25 &amp; 26 Feb 2027) at Easwari Engineering College, Ramapuram, Chennai can be arranged upon prior registration confirmation.
+              </p>
+            </div>
+
+            <div class="glass-premium rounded-2xl p-6 border border-white/10 hover:border-white/20 transition-all">
+              <h4 class="text-base font-bold text-white mb-2">What is the Round 1 submission format?</h4>
+              <p class="text-sm text-slate-400 leading-relaxed font-light">
+                Round 1 requires submitting an initial proposal / presentation (PPT/PDF) via Google Drive link explaining your problem formulation, system block diagram, component selection, and expected deliverables.
+              </p>
+            </div>
           </div>
 
-          <div class="glass rounded-xl p-5 border border-white/10">
-            <h4 class="text-sm font-bold text-white mb-1">Is accommodation provided for outstation teams?</h4>
-            <p class="text-xs text-slate-400 leading-relaxed">
-              Yes, hostel accommodation and food during the 36-hour hackathon (25 &amp; 26 Feb 2027) at Easwari Engineering College, Ramapuram, Chennai can be arranged upon prior registration confirmation.
-            </p>
-          </div>
+          <!-- Ready to Pitch? CTA Card (Exact ImpactNexus Structure) -->
+          <div class="mt-32 max-w-4xl mx-auto">
+            <div class="relative glass-premium rounded-3xl p-10 md:p-16 text-center border border-white/10 overflow-hidden">
+              <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary to-transparent opacity-50"></div>
+              <div class="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent pointer-events-none"></div>
+              <div class="relative z-10 flex flex-col items-center">
+                <div class="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center mb-8 backdrop-blur-md border border-white/10 shadow-xl">
+                  <span class="material-symbols-outlined text-4xl text-white">download</span>
+                </div>
+                <h3 class="text-3xl font-bold text-white mb-4 tracking-tight">Ready to Pitch?</h3>
+                <p class="text-slate-400 max-w-lg mx-auto mb-10 text-lg font-light leading-relaxed">
+                  Grab our official presentation template. It includes the slide structure, guidelines, and tips for a winning pitch.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-6 justify-center w-full">
+                  <a href="#/submit" class="inline-flex items-center justify-center gap-3 px-8 py-4 bg-white/5 hover:bg-white/10 text-white font-bold rounded-2xl backdrop-blur-md border border-white/10 transition-all hover:scale-105">
+                    <span class="material-symbols-outlined">download</span>
+                    Download PPT Template
+                  </a>
+                  <a href="#/register" class="inline-flex items-center justify-center gap-3 px-8 py-4 bg-gradient-to-r from-primary to-primary-hover text-white font-bold rounded-2xl shadow-lg shadow-primary/25 hover:shadow-primary/40 transition-all hover:scale-105">
+                    Register Team (Free)
+                    <span class="material-symbols-outlined">arrow_forward</span>
+                  </a>
+                </div>
+              </div>
+            </div>
 
-          <div class="glass rounded-xl p-5 border border-white/10">
-            <h4 class="text-sm font-bold text-white mb-1">What is the Round 1 submission format?</h4>
-            <p class="text-xs text-slate-400 leading-relaxed">
-              Round 1 requires submitting an initial proposal / presentation (PPT/PDF) via Google Drive link explaining your problem formulation, system block diagram, component selection, and expected deliverables.
-            </p>
+            <div class="mt-20 text-center">
+              <h3 class="text-4xl lg:text-5xl font-black leading-tight tracking-tight italic text-transparent bg-clip-text bg-gradient-to-b from-white to-slate-500 uppercase opacity-50">
+                Good luck. Build something awesome.
+              </h3>
+            </div>
           </div>
         </div>
       </div>
     `;
   };
 
-  // 3. CHALLENGES VIEW
+  // 3. CHALLENGES VIEW (Matching impact-nexus-26 typography & fluidity)
   const renderChallenges = () => {
     return `
-      <div class="relative min-h-screen px-6 py-12 max-w-6xl mx-auto">
-        <div class="text-center mb-16">
-          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-accent-cyan text-xs font-bold uppercase tracking-widest mb-4">
-            <span class="material-symbols-outlined text-sm">target</span>
-            <span>Problem Statements</span>
-          </div>
-          <h1 class="text-4xl sm:text-6xl font-black text-white uppercase italic tracking-tight mb-4">
-            Hackathon Tracks
-          </h1>
-          <p class="text-slate-400 max-w-2xl mx-auto text-sm sm:text-base leading-relaxed">
-            Select one of the 3 official tracks defined for MICROHACK'27. Each track offers complex real-world engineering challenges designed in consultation with Microchip engineers.
-          </p>
-        </div>
+      <div class="relative min-h-screen overflow-hidden">
+        <!-- Atmospheric Glowing Orbs -->
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-[700px] bg-primary/10 rounded-full blur-[140px] animate-pulse-slow pointer-events-none"></div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-          ${TRACKS_DATA.map(t => `
-            <div class="glass-premium rounded-3xl p-8 border border-white/10 hover:border-white/20 transition-all flex flex-col justify-between group">
-              <div>
-                <div class="flex items-center justify-between mb-6">
-                  <div class="size-14 rounded-2xl bg-gradient-to-br ${t.gradient} flex items-center justify-center text-white shadow-lg">
-                    <span class="material-symbols-outlined text-3xl">${t.icon}</span>
-                  </div>
-                  <span class="text-xs font-mono font-bold px-3 py-1 rounded-full bg-white/5 text-accent-cyan border border-white/10">
-                    Track ${t.number}
-                  </span>
-                </div>
-
-                <span class="text-[10px] font-bold text-accent-cyan uppercase tracking-widest block mb-1">${t.category}</span>
-                <h3 class="text-xl font-bold text-white mb-3 group-hover:text-accent-cyan transition-colors">${t.title}</h3>
-                <p class="text-xs text-slate-400 leading-relaxed mb-6">${t.description}</p>
-
-                <div class="border-t border-white/5 pt-4 mb-6 space-y-2">
-                  <span class="text-[10px] uppercase font-bold text-slate-500 tracking-wider block">Key Focus Areas:</span>
-                  <ul class="text-xs text-slate-300 space-y-1">
-                    ${t.whatToBuild.slice(0, 3).map(item => `
-                      <li class="flex items-start gap-1.5">
-                        <span class="material-symbols-outlined text-accent-cyan text-sm shrink-0">check_circle</span>
-                        <span class="line-clamp-1">${item.split(':')[0]}</span>
-                      </li>
-                    `).join('')}
-                  </ul>
-                </div>
-              </div>
-
-              <div class="flex flex-col gap-2">
-                <a href="#/challenges/${t.id}" class="w-full py-3 rounded-xl bg-primary hover:bg-primary-hover text-white font-bold text-xs uppercase tracking-wider text-center transition-all shadow-lg shadow-primary/20">
-                  Full Problem Statement
-                </a>
-                <a href="#/register?track=${t.id}" class="w-full py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white font-semibold text-xs text-center border border-white/10 transition-all">
-                  Register for this Track
-                </a>
-              </div>
+        <div class="relative z-10 max-w-7xl mx-auto px-6 py-20 lg:py-32">
+          <div class="flex flex-col items-center text-center mb-24">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold uppercase tracking-widest mb-8 backdrop-blur-md">
+              <span class="relative flex h-2 w-2">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+              </span>
+              Problem Statements
             </div>
-          `).join('')}
+            <h1 class="text-6xl md:text-8xl font-black mb-8 tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white to-slate-500 uppercase italic drop-shadow-2xl py-2">
+              Hackathon <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent-cyan">Tracks</span>
+            </h1>
+            <p class="text-slate-400 text-xl md:text-2xl max-w-3xl mx-auto font-light leading-relaxed">
+              Select one of the 3 official tracks defined for MICROHACK'27. Each track offers complex real-world engineering challenges designed in consultation with Microchip engineers.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24">
+            ${TRACKS_DATA.map(t => `
+              <div class="glass-premium rounded-3xl p-8 border border-white/5 hover:border-primary/30 hover:-translate-y-2 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10 flex flex-col justify-between group relative overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl pointer-events-none"></div>
+                <div class="relative z-10">
+                  <div class="flex items-center justify-between mb-8">
+                    <div class="size-16 rounded-2xl bg-gradient-to-br ${t.gradient} flex items-center justify-center text-white shadow-lg shadow-primary/20 group-hover:scale-110 transition-transform duration-300">
+                      <span class="material-symbols-outlined text-3xl">${t.icon}</span>
+                    </div>
+                    <span class="text-xs font-mono font-bold px-3 py-1.5 rounded-full bg-white/5 text-accent-cyan border border-white/10">
+                      Track ${t.number}
+                    </span>
+                  </div>
+
+                  <span class="text-[10px] font-bold text-accent-cyan uppercase tracking-widest block mb-2">${t.category}</span>
+                  <h3 class="text-2xl font-black leading-tight tracking-tight text-white mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-accent-cyan transition-all duration-300">${t.title}</h3>
+                  <p class="text-sm text-slate-400 font-light leading-relaxed mb-6">${t.description}</p>
+
+                  <div class="border-t border-white/5 pt-4 mb-8 space-y-2.5">
+                    <span class="text-[10px] uppercase font-bold text-slate-500 tracking-wider block">Key Focus Areas:</span>
+                    <ul class="text-xs text-slate-300 space-y-1.5 font-light">
+                      ${t.whatToBuild.slice(0, 3).map(item => `
+                        <li class="flex items-start gap-2">
+                          <span class="material-symbols-outlined text-accent-cyan text-sm shrink-0 mt-0.5">check_circle</span>
+                          <span class="line-clamp-1">${item.split(':')[0]}</span>
+                        </li>
+                      `).join('')}
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="relative z-10 flex flex-col gap-2.5">
+                  <a href="#/challenges/${t.id}" class="w-full py-3.5 rounded-2xl bg-gradient-to-r from-primary to-primary-hover text-white font-bold text-xs uppercase tracking-wider text-center shadow-lg shadow-primary/25 hover:shadow-primary/40 transition-all hover:scale-[1.02]">
+                    Full Problem Statement
+                  </a>
+                  <a href="#/register?track=${t.id}" class="w-full py-3 rounded-2xl bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white font-semibold text-xs text-center border border-white/10 transition-all hover:scale-[1.02]">
+                    Register for this Track
+                  </a>
+                </div>
+              </div>
+            `).join('')}
+          </div>
         </div>
       </div>
     `;
@@ -1657,6 +1752,23 @@
       if (m) m.textContent = cd.minutes;
       if (s) s.textContent = cd.seconds;
     }, 1000);
+
+    // Interactive pointer glow sheen (DreamPi / ImpactNexus style)
+    let rafId = null;
+    let mouseX = window.innerWidth * 0.5;
+    let mouseY = window.innerHeight * 0.3;
+    const updateGlow = () => {
+      rafId = null;
+      document.documentElement.style.setProperty("--mx", `${mouseX}px`);
+      document.documentElement.style.setProperty("--my", `${mouseY}px`);
+    };
+    window.addEventListener("pointermove", (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      if (rafId === null) {
+        rafId = window.requestAnimationFrame(updateGlow);
+      }
+    }, { passive: true });
   };
 
   // Immediate Execution Guard (works whether DOM is loading, interactive, or complete)

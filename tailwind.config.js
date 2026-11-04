@@ -35,6 +35,7 @@ module.exports = {
       colors: {
         "primary": "#0d59f2",
         "primary-hover": "#0b4bc9",
+        "primary-light": "#3b82f6",
         "microchip-red": "#e31837",
         "accent-cyan": "#0db9f2",
         "accent-emerald": "#13ecc8",
