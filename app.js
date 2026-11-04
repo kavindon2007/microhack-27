@@ -1359,33 +1359,78 @@
     // Scroll to top
     window.scrollTo({ top: 0, behavior: "instant" });
 
-    // Match route
+    let htmlContent = "";
     if (route === "/" || route === "") {
-      appEl.innerHTML = renderHome();
+      htmlContent = renderHome();
     } else if (route === "/guidelines") {
-      appEl.innerHTML = renderGuidelines();
+      htmlContent = renderGuidelines();
     } else if (route === "/challenges") {
-      appEl.innerHTML = renderChallenges();
+      htmlContent = renderChallenges();
     } else if (route.startsWith("/challenges/")) {
       const trackId = route.replace("/challenges/", "");
-      appEl.innerHTML = renderChallengeDetail(trackId);
+      htmlContent = renderChallengeDetail(trackId);
     } else if (route === "/schedule") {
-      appEl.innerHTML = renderSchedule();
+      htmlContent = renderSchedule();
     } else if (route === "/register") {
-      appEl.innerHTML = renderRegister();
+      htmlContent = renderRegister();
     } else if (route === "/submit") {
-      appEl.innerHTML = renderSubmit();
+      htmlContent = renderSubmit();
     } else if (route === "/my-submissions") {
-      appEl.innerHTML = renderMySubmissions();
+      htmlContent = renderMySubmissions();
     } else if (route === "/health") {
-      appEl.innerHTML = renderHealth();
+      htmlContent = renderHealth();
     } else if (route === "/privacy") {
-      appEl.innerHTML = renderPrivacy();
+      htmlContent = renderPrivacy();
     } else if (route === "/terms") {
-      appEl.innerHTML = renderTerms();
+      htmlContent = renderTerms();
     } else {
-      appEl.innerHTML = renderNotFound();
+      htmlContent = renderNotFound();
     }
+
+    appEl.innerHTML = `<div class="page-enter">${htmlContent}</div>`;
+    initScrollReveal();
+  };
+
+  // --- Smooth Toast Notification System ---
+  const showToast = (title, message, type = "success") => {
+    let container = document.getElementById("toast-container");
+    if (!container) {
+      container = document.createElement("div");
+      container.id = "toast-container";
+      document.body.appendChild(container);
+    }
+    const toast = document.createElement("div");
+    const isSuccess = type === "success";
+    toast.className = `toast-item glass-premium px-5 py-4 rounded-2xl border ${isSuccess ? 'border-accent-emerald/40 bg-emerald-950/90 text-emerald-300' : 'border-primary/40 bg-slate-900/90 text-white'} shadow-2xl flex items-start gap-3 min-w-[280px] max-w-sm pointer-events-auto`;
+    toast.innerHTML = `
+      <span class="material-symbols-outlined text-xl ${isSuccess ? 'text-accent-emerald' : 'text-primary'} mt-0.5 shrink-0">
+        ${isSuccess ? 'check_circle' : 'info'}
+      </span>
+      <div class="flex-1">
+        <h4 class="text-xs font-bold uppercase tracking-wider text-white">${title}</h4>
+        <p class="text-xs text-slate-300 mt-0.5 leading-relaxed">${message}</p>
+      </div>
+    `;
+    container.appendChild(toast);
+    setTimeout(() => {
+      toast.classList.add("toast-leave");
+      setTimeout(() => toast.remove(), 260);
+    }, 4000);
+  };
+
+  // --- Scroll-Reveal Observer ---
+  const initScrollReveal = () => {
+    if (!('IntersectionObserver' in window)) return;
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-in');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
   };
 
   // --- Form & Action Handlers ---
@@ -1428,8 +1473,10 @@
       };
 
       saveTeam(teamData);
-      alert(`Team "${teamName}" registered successfully for MICROHACK'27! Proceeding to proposal dashboard.`);
-      navigateTo("/my-submissions");
+      showToast("Registration Confirmed! 🎉", `Team "${teamName}" registered for MICROHACK'27. Proceeding to proposal dashboard.`, "success");
+      setTimeout(() => {
+        navigateTo("/my-submissions");
+      }, 700);
     },
     handleSubmit: (e) => {
       e.preventDefault();
@@ -1447,12 +1494,14 @@
       };
 
       saveSubmission(subData);
-      alert("Proposal PPT submitted successfully! Your team details are updated.");
-      navigateTo("/my-submissions");
+      showToast("Proposal Submitted! ⚡", "Round 1 PPT link recorded successfully. Your team profile is now updated.", "success");
+      setTimeout(() => {
+        navigateTo("/my-submissions");
+      }, 700);
     }
   };
 
-  // --- Global Event Listeners ---
+  // --- Global Event Listeners & Hardware Smoothness ---
   window.addEventListener("hashchange", renderApp);
   window.addEventListener("DOMContentLoaded", () => {
     renderApp();
@@ -1464,12 +1513,38 @@
       menuBtn.addEventListener("click", () => {
         mobileMenu.classList.toggle("hidden");
       });
+      // Auto close mobile menu when link is clicked
+      mobileMenu.querySelectorAll("a").forEach(link => {
+        link.addEventListener("click", () => {
+          mobileMenu.classList.add("hidden");
+        });
+      });
     }
 
-    // Interactive Sheen Coordinates
+    // Modal click-outside & Escape dismissal
+    const qrModal = document.getElementById("qr-modal");
+    if (qrModal) {
+      qrModal.addEventListener("click", (e) => {
+        if (e.target === qrModal) {
+          window.MicroHack.closeQRModal();
+        }
+      });
+    }
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        window.MicroHack.closeQRModal();
+      }
+    });
+
+    // Throttled 60/120fps Cursor Sheen
+    let rafId = null;
     window.addEventListener("pointermove", (e) => {
-      document.documentElement.style.setProperty("--mx", `${e.clientX}px`);
-      document.documentElement.style.setProperty("--my", `${e.clientY}px`);
+      if (rafId) return;
+      rafId = requestAnimationFrame(() => {
+        document.documentElement.style.setProperty("--mx", `${e.clientX}px`);
+        document.documentElement.style.setProperty("--my", `${e.clientY}px`);
+        rafId = null;
+      });
     }, { passive: true });
 
     // Live Countdown Interval
